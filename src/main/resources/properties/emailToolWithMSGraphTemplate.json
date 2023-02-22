@@ -1,0 +1,88 @@
+[
+    {
+        "title" : "@@processTool.EmailToolWithMSGraph.azureApp@@",
+        "properties" : [
+            {
+                "name" : "tenantId",
+                "label" : "@@processTool.EmailToolWithMSGraph.tenantID@@",
+                "type" : "textfield",
+                "required" : "true"
+            },
+            {
+                "name" : "clientId",
+                "label" : "@@processTool.EmailToolWithMSGraph.clientID@@",
+                "type" : "textfield",
+                "required" : "true"
+            },
+            {
+                "name" : "clientSecret",
+                "label" : "@@processTool.EmailToolWithMSGraph.clientSecret@@",
+                "type" : "textfield",
+                "required" : "true"
+            }
+        ]
+    },
+    {
+        "title" : "@@processTool.EmailToolWithMSGraph.configMessage@@",
+        "properties" : [
+            {
+                "name" : "formId",
+                "label" : "@@app.emailtool.form@@",
+                "type" : "selectbox",
+                "required" : "true",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/forms/options"
+            },
+            {
+                "name" : "fromEmail",
+                "label" : "@@processTool.EmailToolWithMSGraph.senderEmail@@",
+                "type" : "selectbox",
+                "required" : "true",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"
+            },
+            {
+                "name" : "toEmail",
+                "label" : "@@processTool.EmailToolWithMSGraph.recipientEmail@@",
+                "type" : "selectbox",
+                "required" : "true",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            },
+            {
+                "name" : "cc",
+                "label" : "@@app.emailtool.cc@@",
+                "type" : "selectbox",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            },
+            {
+                "name" : "bcc",
+                "label" : "@@app.emailtool.bcc@@",
+                "type" : "selectbox",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            },
+            {
+                "name" : "subject",
+                "label" : "@@app.emailtool.subject@@",
+                "type" : "selectbox",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            },
+            {
+                "name" : "message",
+                "label" : "@@app.emailtool.message@@",
+                "type" : "selectbox",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            },
+            {
+                "name" : "attachments",
+                "label" : "@@app.emailtool.attachments@@",
+                "type" : "selectbox",
+                "options_ajax_on_change" : "formDefId:formId",
+                "options_ajax" : "[CONTEXT_PATH]/web/json/console/app[APP_PATH]/form/columns/options"  
+            }
+        ]
+    }
+]
