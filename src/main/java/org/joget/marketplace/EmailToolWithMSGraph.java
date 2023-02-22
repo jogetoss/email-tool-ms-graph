@@ -159,40 +159,22 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
             Plugin plugin = pluginManager.getPlugin(pluginName);
             AppDefinition appDef = AppUtil.getCurrentAppDefinition();
 
-            //Get info from the form
-            String senderEmail = "";
-            String toEmail = "";
-            String ccString = "";
-            String bccString = "";
-            String subject = "";
-            String messageString = "";
+            String senderEmail = getPropertyString("fromEmail");
+            String toEmail = getPropertyString("toEmail");
+            String ccString = getPropertyString("cc");
+            String bccString = getPropertyString("bcc");
+            String subject = getPropertyString("subject");
+            String messageString = getPropertyString("message");
             String attachmentString = "";
-
+            
+            //Get info from the form
             FileAndFormExtraction getForm = new FileAndFormExtraction(getPropertyString("formId"), appDef, (WorkflowAssignment) properties.get("workflowAssignment"));
             FormRowSet formRowSet = getForm.getFormRowSet();
             for (FormRow r : formRowSet) {
-                //The two required variables
-                senderEmail = r.getProperty(getPropertyString("fromEmail"));
-                toEmail = r.getProperty(getPropertyString("toEmail"));
-
-                //The rest
-                if (!getPropertyString("cc").isEmpty()) {
-                    ccString = r.getProperty(getPropertyString("cc"));
-                }
-                if (!getPropertyString("bcc").isEmpty()) {
-                    bccString = r.getProperty(getPropertyString("bcc"));
-                }
-                if (!getPropertyString("subject").isEmpty()) {
-                    subject = r.getProperty(getPropertyString("subject"));
-                }
-                if (!getPropertyString("message").isEmpty()) {
-                    messageString = r.getProperty(getPropertyString("message"));
-                }
                 if (!getPropertyString("attachments").isEmpty()) {
                     //It returns the name of the file
                     attachmentString = r.getProperty(getPropertyString("attachments"));
                 }
-
             }
 
             //Prepare map
@@ -313,6 +295,6 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
 
     @Override
     public String getClassName() {
-        return this.getClassName();
+        return getClass().getName();
     }
 }

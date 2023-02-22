@@ -123,6 +123,6 @@ public class FileAndFormExtraction {
     }
     
     public String getClassName() {
-        return this.getClassName();
+        return getClass().getName();
     }
 }
