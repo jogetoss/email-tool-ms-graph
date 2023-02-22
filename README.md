@@ -1,6 +1,10 @@
 # Description
 
-This repository is meant to serve as a general template for how to set up new repositories in the JogetOSS organization. 
+**This plugin is still in development process**
+
+*Send Email with MS Graph Plugin Tool* is a process plugin tool that lets you send emails using the MS Graph API. This plugin requires [Enhanced JSON Tool](https://github.com/jogetoss/enhanced-json-tool) plugin to be installed.
+
+Please see documentation at https://dev.joget.org/community/display/marketplace/Send+Email+with+MS+Graph+Plugin+Tool
 
 # Getting Help
 
