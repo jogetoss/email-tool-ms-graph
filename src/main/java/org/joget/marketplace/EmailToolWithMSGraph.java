@@ -25,7 +25,7 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
 
     @Override
     public String getName() {
-        return "Email Tool With the Microsoft Graph API";
+        return AppPluginUtil.getMessage("org.joget.marketplace.EmailToolWithMSGraph.pluginName", getClassName(), MESSAGE_PATH);
     }
 
     @Override
@@ -128,15 +128,15 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
             //Set properties
             if (plugin instanceof PropertyEditable) {
                 ((PropertyEditable) plugin).setProperties(propertiesMap);
-                LogUtil.info(getClassName(), "set properties");
+                debug(properties, getClassName(), "set properties");
             }
 
             //Invoke the JSON plugin
             Object res = plugin.execute(propertiesMap);
 
             //Log
-            LogUtil.info(getClassName(), "Execution end");
-            LogUtil.info(getClassName(), "The token is: " + res.toString());
+            debug(properties, getClassName(), "Execution end");
+            debug(properties, getClassName(), "The token is: " + res.toString());
 
             //End
             return res.toString();
@@ -168,7 +168,7 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
             String attachmentString = "";
             
             //Get info from the form
-            FileAndFormExtraction getForm = new FileAndFormExtraction(getPropertyString("formId"), appDef, (WorkflowAssignment) properties.get("workflowAssignment"));
+            FileAndFormExtraction getForm = new FileAndFormExtraction(getPropertyString("formId"), appDef, (WorkflowAssignment) properties.get("workflowAssignment"), properties);
             FormRowSet formRowSet = getForm.getFormRowSet();
             for (FormRow r : formRowSet) {
                 if (!getPropertyString("attachments").isEmpty()) {
@@ -279,14 +279,14 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
             //Set properties
             if (plugin instanceof PropertyEditable) {
                 ((PropertyEditable) plugin).setProperties(propertiesMap);
-                LogUtil.info(getClassName(), "set properties");
+                debug(properties, getClassName(), "set properties");
             }
 
             //Invoke the JSON plugin
             plugin.execute(propertiesMap);
 
             //Log end
-            LogUtil.info(getClassName(), "Execution end");
+            debug(properties, getClassName(), "Execution end");
 
         } catch (Exception e) {
             LogUtil.error(getClassName(), e, "Execution error");
@@ -296,5 +296,11 @@ public class EmailToolWithMSGraph extends DefaultApplicationPlugin {
     @Override
     public String getClassName() {
         return getClass().getName();
+    }
+    
+    public static void debug(Map properties, String className, String message) {
+        if (properties.get("debug") != null && "true".equals(properties.get("debug").toString())) {
+            LogUtil.info(className, message);
+        }
     }
 }

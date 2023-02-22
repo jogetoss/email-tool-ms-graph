@@ -13,11 +13,12 @@ import org.joget.apps.form.model.FormRowSet;
 import org.joget.commons.util.LogUtil;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 /**
- * @author Hazael Frans Christian Given a form's details and a specific field
- * ID, will extract the file uploaded in that field also provides other info
- * about the form like their 'FormRowSet'
+ * @author Hazael Frans Christian 
+ * Given a form's details and a specific field ID, will extract the file uploaded 
+ * in that field also provides other info about the form like their 'FormRowSet'
  */
 public class FileAndFormExtraction {
 
@@ -25,14 +26,16 @@ public class FileAndFormExtraction {
     private String formDefID;
     private WorkflowAssignment assignment;
     private AppDefinition appDef;
+    private Map properties;
 
-    public FileAndFormExtraction(String formDefId, AppDefinition appDef, WorkflowAssignment assignment) {
+    public FileAndFormExtraction(String formDefId, AppDefinition appDef, WorkflowAssignment assignment, Map properties) {
         /*
         Constructor
          */
         this.formDefID = formDefId;
         this.appDef = appDef;
         this.assignment = assignment;
+        this.properties = properties;
     }
 
     private String getPk() {
@@ -74,17 +77,16 @@ public class FileAndFormExtraction {
                 for (FormRow r : formRowSet) {
                     //Get file
                     String files = r.getProperty(fileField);
-                    LogUtil.info(getClassName(), "Files found - " + files);
+                    debug(this.properties, getClassName(), "File found - " + files);
 
                     if (files != null && !files.isEmpty()) {
                         String[] file_paths = files.split(";");
                         for (String path : file_paths) {
                             //The file path
-                            LogUtil.info(getClassName(), "File Path - " + path);
+                            debug(this.properties, getClassName(), "File path - " + path);
 
                             File file = FileUtil.getFile(path, tableName, getPk());
                             if (file != null && file.exists()) {
-                                LogUtil.info(getClassName(), "File detected - True");
                                 return file;
                             }
                         }
@@ -124,5 +126,11 @@ public class FileAndFormExtraction {
     
     public String getClassName() {
         return getClass().getName();
+    }
+    
+    public static void debug(Map properties, String className, String message) {
+        if (properties.get("debug") != null && "true".equals(properties.get("debug").toString())) {
+            LogUtil.info(className, message);
+        }
     }
 }
