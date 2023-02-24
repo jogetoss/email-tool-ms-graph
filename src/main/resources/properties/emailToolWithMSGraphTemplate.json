@@ -19,6 +19,18 @@
                 "label" : "@@processTool.EmailToolWithMSGraph.clientSecret@@",
                 "type" : "textfield",
                 "required" : "true"
+            },
+            {
+                "name":"debug",
+                "label":"@@app.jsontool.debugMode@@",
+                "description":"@@app.jsontool.debugMode.desc@@",
+                "type":"checkbox",
+                "options":[
+                    {
+                        "value":"true",
+                        "label":""
+                    }
+                ]
             }
         ]
     },
@@ -27,13 +39,13 @@
         "properties" : [
             {
                 "name" : "fromEmail",
-                "label" : "@@processTool.EmailToolWithMSGraph.senderEmail@@",
+                "label" : "@@app.emailtool.from@@",
                 "type" : "textfield",
                 "required" : "true"
             },
             {
                 "name" : "toEmail",
-                "label" : "@@processTool.EmailToolWithMSGraph.recipientEmail@@",
+                "label" : "@@app.emailtool.toEmail@@",
                 "type" : "textfield",
                 "required" : "true"
             },
